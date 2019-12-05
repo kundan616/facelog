@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+<head>
+<title>split bills</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+<style>
+.but{
+	margin-top:40%;
+}
+
+</style>
+</head>
+<body class="hold-transition login-page container">
+<div class="row">
+<div class="col-md-6 ">
+
+<div class="but">
+
+<a href="/login" ><button class="btn btn-primary btn-block btn-flat" name="login"><i class="fa fa-sign-in"></i> Sign-In</button></a>
+
+</div>
+</div>
+<div class="col-md-6">
+<div class="but">
+<a href="/signup" ><button class="btn btn-primary btn-block btn-flat" name="signup"><i class="fa fa-sign-in"></i> Sign-up</button></a>
+</div>
+</div>
+</div>
+</div>
+<div class="login-box">
+
+</div>
+
+</body>
+</html>
