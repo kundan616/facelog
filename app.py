@@ -105,15 +105,28 @@ def upload():
       with open("imagefromcamera.jpg", "wb") as fh:
          fh.write(base64.decodebytes(imgcode64))
 
-      known_image = face_recognition.load_image_file("/content/171234_v9_bb.jpg")
-      unknown_image = face_recognition.load_image_file("/content/high-jackman.jpg")
+      conn,c = connection()
 
-      biden_encoding = face_recognition.face_encodings(known_image)[0]
-      unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
-      results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
-      print(results[0])         
+      findsql="SELECT email FROM users;"
+      c.execute(findsql)
+      row=c.fetchall()      
+      unknown_image = face_recognition.load_image_file("imagefromcamera.jpg")
+      biden_encoding = face_recognition.face_encodings(unknown_image)[0]
+      
+      for ent in row:
+         known_image = face_recognition.load_image_file("{}.jpg".format(ent["email"]))
+         unknown_encoding = face_recognition.face_encodings(known_image)[0]
+         results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
+         
+         if results[0] == True:
+            session['email']=email
+            return redirect(url_for('dashboard'))
+       
+      return ('face not in database')   
+            
 
    return render_template('signup.html')
+
 
 
 if __name__ == '__main__':
